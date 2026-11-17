@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B6E78">
+<title>Boshqaruv paneli</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+.top h1{font:700 1.5rem/1.2 var(--serif);margin:0}
+.top .r{display:flex;gap:8px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.kpi b{display:block;font:700 1.7rem/1.1 var(--serif)}
+.kpi span{color:var(--muted);font-size:.88rem}
+.item{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.item .tt{min-width:0}.item b{display:block;overflow-wrap:anywhere}
+.item span{color:var(--muted);font-size:.86rem}
+.item .btns{display:flex;gap:6px;flex:none}
+.item .btns button,.item .btns a{padding:6px 12px;min-height:40px;font-size:.9rem}
+.head2{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.head2 h2,.card h2{font:600 1.15rem var(--serif);margin:0}
+.head2 input{max-width:240px;min-height:40px;padding:8px 14px}
+progress{width:100%;height:10px;margin-top:10px}
+#login{max-width:400px;margin:12vh auto 0}
+.top5{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:.9rem}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:14px;text-align:center;color:var(--muted)}
+.drop.on{border-color:var(--accent);background:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="login" hidden>
+    <h1 style="font:700 1.4rem var(--serif);margin:0 0 14px">Admin kirishi</h1>
+    <div class="field"><label for="u">Login</label><input id="u" autocomplete="username"></div>
+    <div class="field"><label for="p">Parol</label><input id="p" type="password" autocomplete="current-password"></div>
+    <button class="primary" id="loginBtn" type="button" style="width:100%">Kirish</button>
+    <p class="msg err" id="loginMsg" role="alert"></p>
+  </div>
+
+  <div id="panel" hidden>
+    <div class="top">
+      <h1>Boshqaruv paneli</h1>
+      <div class="r">
+        <a class="btn" href="/">Saytni ko'rish</a>
+        <button class="icon" id="themeBtn" type="button" data-theme-btn aria-label="Tun rejimi"></button>
+        <button id="logout" type="button">Chiqish</button>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><b id="kBooks">0</b><span>kitob</span></div>
+      <div class="kpi"><b id="kViews">0</b><span>marta o'qilgan</span></div>
+      <div class="kpi"><b id="kSize">0</b><span>MB joy band</span></div>
+      <div class="kpi"><span>Eng ko'p o'qilganlar</span><ol class="top5" id="kTop"><li>Hozircha yo'q</li></ol></div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h2 id="formTitle" style="margin-bottom:12px">Yangi kitob qo'shish</h2>
+      <div class="field"><label for="title">Kitob nomi *</label><input id="title" maxlength="200"></div>
+      <div class="row">
+        <div class="field"><label for="author">Muallif</label><input id="author" maxlength="150"></div>
+        <div class="field"><label for="category">Bo'lim</label><input id="category" list="cats" maxlength="60" placeholder="Masalan: Dasturlash"><datalist id="cats"></datalist></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="year">Nashr yili</label><input id="year" inputmode="numeric" maxlength="4" placeholder="2020"></div>
+        <div class="field"><label for="pdf" id="pdfLabel">PDF fayl *</label><input id="pdf" type="file" accept="application/pdf,.pdf"></div>
+      </div>
+      <div class="field"><label for="desc">Qisqacha tavsif (ixtiyoriy)</label><textarea id="desc" rows="2" maxlength="2000"></textarea></div>
+      <div style="display:flex;gap:8px">
+        <button class="primary" id="save" type="button">Saqlash</button>
+        <button id="cancel" type="button" hidden>Bekor qilish</button>
+      </div>
+      <progress id="prog" max="1" value="0" hidden></progress>
+      <p class="msg" id="msg" role="status"></p>
+    </div>
+
+    <div class="card">
+      <div class="head2">
+        <h2>Kitoblar <span id="n" style="color:var(--muted);font:.9rem var(--font)"></span></h2>
+        <input id="filter" type="search" placeholder="Qidirish" aria-label="Kitoblar ichidan qidirish">
+      </div>
+      <div id="list"></div>
+    </div>
+  </div>
+</div>
+<script src="/admin.js"></script>
+</body>
+</html>

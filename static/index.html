@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B6E78">
+<meta name="description" content="Texnikum onlayn kutubxonasi: kitoblarni telefondan o'qing">
+<title>Online kutubxona</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<script src="/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand"><i><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 5v16"/></svg></i><span id="site">Online kutubxona</span></div>
+      <button class="icon" type="button" data-theme-btn aria-label="Tun rejimi"></button>
+    </div>
+    <h1>Kitobni toping va hoziroq o'qing</h1>
+    <p>Hech narsa o'rnatish shart emas. Nomi yoki muallifini yozing.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <label class="sr" for="q">Kitob qidirish</label>
+      <input id="q" type="search" placeholder="Masalan: Python, algebra, Navoiy" autocomplete="off" enterkeyhint="search">
+      <button class="clear" id="qx" type="button" aria-label="Tozalash" hidden>&times;</button>
+    </div>
+    <div class="stats" id="stats" hidden></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="resume" hidden></div>
+
+  <div class="tabs" role="tablist" aria-label="Ko'rinish">
+    <button class="tab" role="tab" id="tAll" aria-selected="true" type="button">Barcha kitoblar</button>
+    <button class="tab" role="tab" id="tFav" aria-selected="false" type="button">Saqlanganlar <span id="favN"></span></button>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Bo'limlar"></div>
+
+  <div id="popular" hidden>
+    <h2 class="shelf-title">Ko'p o'qilayotganlar</h2>
+    <div class="grid" id="popGrid"></div>
+  </div>
+
+  <h2 class="shelf-title" id="listTitle">Hamma kitoblar</h2>
+  <div class="bar2">
+    <span class="count" id="count" aria-live="polite"></span>
+    <label class="sr" for="sort">Saralash</label>
+    <select id="sort">
+      <option value="new">Yangilari</option>
+      <option value="popular">Ko'p o'qilganlari</option>
+      <option value="title">Nomi (A-Z)</option>
+      <option value="author">Muallifi (A-Z)</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+  <button class="btn more" id="more" type="button" hidden>Yana ko'rsatish</button>
+</main>
+<div class="foot" id="foot"></div>
+
+<dialog id="det" aria-labelledby="dt">
+  <div class="det">
+    <button class="x" id="dx" type="button" aria-label="Yopish"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="cover" id="dcv"><b id="dct"></b><small id="dca"></small></div>
+    <div>
+      <h2 id="dt"></h2>
+      <p class="by" id="da"></p>
+      <div class="tags" id="df"></div>
+      <p class="d" id="dd"></p>
+      <div class="acts">
+        <a class="btn primary" id="dread" href="#">O'qish</a>
+        <button class="btn icon" id="dfav" type="button" aria-label="Saqlash" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.3 8.6 3 5 6.5 5c2 0 3.6 1.1 5.5 3 1.9-1.9 3.5-3 5.5-3 3.5 0 5.2 3.6 4 6.800C19.5 16.4 12 21 12 21z"/></svg></button>
+        <button class="btn icon" id="dsh" type="button" aria-label="Ulashish"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.500l6.8 4M15.4 6.500l-6.8 4"/></svg></button>
+        <a class="btn icon" id="ddl" href="#" download aria-label="Yuklab olish"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+      </div>
+    </div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# VPS uchun: sayt + avtomatik HTTPS (Caddy). Ishga tushirish: docker compose up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      APP_ENV: production
+      DATA_DIR: /data
+    volumes:
+      - kutubxona_data:/data
+    expose:
+      - "8000"
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+volumes:
+  kutubxona_data:
+  caddy_data:
+  caddy_config:
